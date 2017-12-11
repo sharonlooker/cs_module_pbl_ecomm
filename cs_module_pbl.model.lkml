@@ -14,29 +14,17 @@ datagroup: cs_module_pbl_default_datagroup {
 persist_with: cs_module_pbl_default_datagroup
 
 
-explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: inventory_items {
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: order_items {
+  access_filter: {
+    field: products.brand
+    user_attribute: brand_pbl
+  }
+
+  access_filter: {
+    field: users.state
+    user_attribute: state_pbl
+  }
+
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
@@ -61,13 +49,3 @@ explore: order_items {
     relationship: many_to_one
   }
 }
-
-explore: products {
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: users {}

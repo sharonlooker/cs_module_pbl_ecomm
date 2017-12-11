@@ -13,11 +13,6 @@ datagroup: cs_module_pbl_default_datagroup {
 
 persist_with: cs_module_pbl_default_datagroup
 
-explore: bsandell {}
-
-explore: company_list {}
-
-explore: distribution_centers {}
 
 explore: events {
   join: users {
